@@ -3,7 +3,15 @@
 1.	Cài đặt
 -	Cài MySQL bản 8
 - Sửa pasword trong file application.properties trùng với pasword của MySQL
--	Vào mysql -> tạo 1 bảng tên bắt buộc là shop.
+-	Vào mysql -> connect MySQLServer -> server -> data import
+-	import file shop.sql vào 1 schema mới tên shop
+
+![image](https://user-images.githubusercontent.com/130289045/230774552-385ec277-00ca-49e8-a00e-502e0d0b08be.png)
+
+-	sang tab import progress -> start import 
+![image](https://user-images.githubusercontent.com/130289045/230774690-5cf3b771-f858-41dd-9808-2967d449f696.png)
+
+
 2.	Chạy
 -	Gõ http://localhost:8080 ở trình duyệt sẽ hiện trang chủ
 ![Screenshot 2023-04-09 193126](https://user-images.githubusercontent.com/130289045/230772647-5b14b2ef-793d-4eae-af02-433c6f5e05a7.png)
