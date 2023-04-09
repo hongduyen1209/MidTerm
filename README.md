@@ -1,5 +1,5 @@
 # MidTerm
-##Hướng dẫn và kết quả chạy chương trình
+## Hướng dẫn và kết quả chạy chương trình
 1.	Cài đặt
 -	Cài MySQL bản 8
 - Sửa pasword trong file application.properties trùng với pasword của MySQL
@@ -44,15 +44,15 @@
 -	http://localhost:8080/cart/check-out:  thanh toán
 ![image](https://user-images.githubusercontent.com/130289045/230773834-0073ddb0-63fe-42ad-8e8e-b7cef2dae935.png)
 
-##Sơ dồ ERD
+## Sơ dồ ERD
 ![Blank diagram (1)](https://user-images.githubusercontent.com/130289045/230773867-363bada7-929a-4b18-aedf-21240f6631a1.png)
 
 
-##Flow Chart
-###User
+## Flow Chart
+### User
 ![user](https://user-images.githubusercontent.com/130289045/230773910-bf1a8e56-5f94-4d2c-8492-aac3cb8ac886.png)
 
-###Admin
+### Admin
 ![Admin](https://user-images.githubusercontent.com/130289045/230773924-e0d96f43-dad0-42c9-b2f0-1937d06ff3f9.png)
 
 
