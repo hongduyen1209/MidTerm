@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Form Product Update</title>
+</head>
+<body>
+<div th:replace="fragment/header.html :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+                <div class="row">
+                    <h4>THÔNG TIN SẢN PHẨM</h4>
+                    <hr />
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Mã sản phẩm:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.code}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Tên sản phẩm:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.name}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Giá tiền:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.price} + ' đ'"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Số lượng:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.quantity}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Màu sắc:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.color}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Độ phân giải:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.resolution}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Hệ điều hành:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.os}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Tình trạng:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.status}=='0'?'Đang kinh doanh':'Ngừng kinh doanh' "></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Bộ nhớ trong:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.rom}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Bộ nhớ ngoài:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.ram}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Loại sản phẩm:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.category.name}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Nhãn hiệu:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.brand.name}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="pt-1 text-right">Mô tả:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <p class="pt-1"><b th:text="${product.description}"></b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p class="pt-1 text-right">Hình ảnh sản phẩm:</p>
+                            </div>
+                            <div class="col-md-9">
+                                <img th:src="'data:image/png;base64,' + ${product.imgBase64}" alt="" width="100" height="100" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="d-flex">
+                        <a th:href="${'/product'}" class="btn btn-success" role="button" aria-pressed="true">
+                            <span class="me-1"><i class="fa fa-arrow-left" aria-hidden="true"></i></span>
+                            Quay về</a>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

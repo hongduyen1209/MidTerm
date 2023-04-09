@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body>
+    <div th:replace="fragment/header.html :: header"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+                <h3>Quản lý loại sản phẩm</h3>
+            </div>
+            <div class="col-md-3">
+                <div class="list-group mt-3">
+                    <a th:href="@{/product}" class="list-group-item list-group-item-action" aria-current="true">
+                        Quản lý sản phẩm
+                    </a>
+                    <a th:href="@{/brand}" class="list-group-item list-group-item-action">Quản lý nhãn hiệu</a>
+                    <a th:href="@{/category}" class="list-group-item list-group-item-action active">Quản lý loại sản phẩm</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <fieldset class="card-box">
+                            <legend class="float-none w-auto p-2 mb-0">Tìm kiếm</legend>
+                            <form th:action="@{'/category'}">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="form-control-label font-weight-bolder">Tên loại sản phẩm</label>
+                                        <div class="mt-1">
+                                            <input type="text" class="form-control" placeholder="Tên loại sản phẩm" th:name="name">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary mt-1" type="submit"><i class="fas fa-search me-1"></i>Tìm kiếm</button>
+                                        <a th:href="@{'/category/add-category'}" class="btn btn-info mt-1 ms-1" role="button" aria-pressed="true"><i class="fas fa-plus me-1"></i>Tạo mới</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-md-12 my-2">
+                    <span class="font-weight-medium theme-color">Danh sách loại sản phẩm</span>
+                </div>
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-primary">
+                            <tr>
+                                <th class="text-center align-middle" scope="col">STT</th>
+                                <th class="text-center align-middle" scope="col">Tên loại sản phẩm</th>
+                                <th class="text-center align-middle" scope="col">Mô tả</th>
+                                <th class="text-center align-middle" scope="col">Hành động</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${categories.empty}">
+                                <td class="text-center align-middle" colspan="4">Không có dữ liệu</td>
+                            </tr>
+                            <tr th:each="c,iStat: ${categories}">
+                                <td class="align-middle text-center" th:text="${iStat.index + 1}"></td>
+<!--                                <td class="align-middle text-center text-capitalize text-primary">-->
+<!--                                    <span class="m-cursor">mark</span>-->
+<!--                                </td>-->
+                                <td class="align-middle text-center" th:text="${c.name}"></td>
+                                <td class="align-middle text-center" th:text="${c.description}"></td>
+
+                                <td class="align-middle text-center">
+                                    <a th:href="@{/category/edit/{id}(id=${c.id})}">
+                                        <span class="text-info m-cursor" title="Cập nhật">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-between">
+                    <div class="d-flex justify-content-end">
+                        <nav aria-label="Pagination" th:if="${totalPages > 0}">
+                            <ul class="pagination justify-content-center">
+
+                                <li class="page-item" th:classappend="${page == currentPage} ? 'active'"
+                                    th:each="page : ${#numbers.sequence(currentPage > 2 ? currentPage - 2 : 1, currentPage + 2 < totalPages ? currentPage + 2 : totalPages)}">
+                                    <a class="page-link" th:href="@{'/category?' + ${name!=null && name!=''? 'name=' + name + '&' : ''} + 'page=' + ${page} + '&size=' + ${pageSize}}"> [[${page}]]</a>
+                                </li>
+
+                            </ul>
+                        </nav>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

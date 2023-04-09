@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Danh sách sản phẩm</title>
+</head>
+<body>
+<div th:replace="fragment/header.html :: header"></div>
+<form th:object="${user}" method="post" th:action="@{'/cart/check-out'}">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-4 border">
+                <h4>THÔNG TIN SẢN PHẨM</h4>
+                <div class="row my-1" th:each="item : ${listItem}">
+                    <div class="col-md-5">
+                        <img th:src="'data:image/png;base64,' + ${item.img}" class="d-block w-75" alt="...">
+                    </div>
+                    <div class="col-md-5">
+                        <h6 class="text-break" th:text="${item.name}"></h6>
+                        <strong>Số lượng: </strong><span th:text="${item.quantity}"></span>
+                        <strong><p class="text-danger" th:text="${item.priceFormat}"></p></strong>
+                    </div>
+                    <div class="col-md-2">
+                        <a th:href="@{/cart/clear-item/{id}(id=${item.id})}">
+                            <span class="mx-1 text-secondary"><i class="fa fa-trash text-secondary" aria-hidden="true"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 border">
+                <h4>THÔNG TIN KHÁCH HÀNG</h4>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Họ" th:name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Tên" th:name="firstName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Số điện thoại" th:name="phoneNum" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="email" class="form-control" placeholder="Email" th:name="email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Thành phố" th:name="city" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Quận / Huyện" th:name="state" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Phường / Xã" th:name="ward" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mt-1">
+                                        <input type="text" class="form-control" placeholder="Địa chỉ" th:name="address" required>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                     <div class="col-md-1">
+                     </div>
+                    <div class="col-md-11">
+                        <div class="border rounded p-2">
+                            <div class="d-flex justify-content-between">
+
+                                <strong >Tổng tiền</strong>
+                                <strong th:if="${ gTotal > 0 }" class="text-danger" th:text="${total}"></strong>
+                            </div>
+                            <div class="col-md-12">
+                                <button th:if="${listItem != null && listItem.size() > 0}" type="submit" class="btn btn-primary mt-2 w-100">Đặt hàng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</form>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Form Product</title>
+</head>
+<body>
+<div th:replace="fragment/header.html :: header"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <form th:action="@{'/product/add-product'}" method="post" th:object="${product}" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Mã sản phẩm</label>
+                        <div class="mt-1">
+                            <input type="text" class="form-control" placeholder="Mã sản phẩm" th:field="*{code}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Tên sản phẩm</label>
+                        <div class="mt-1">
+                            <input type="text" class="form-control" placeholder="Tên sản phẩm" th:field="*{name}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Giá tiền</label>
+                        <div class="mt-1">
+                            <input type="number" min="1" class="form-control" placeholder="Giá tiền" th:field="*{price}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Số lượng</label>
+                        <div class="mt-1">
+                            <input type="number" class="form-control" placeholder="Số lượng" th:field="*{quantity}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Bộ nhớ ngoài</label>
+                        <div class="mt-1">
+                            <input type="number" class="form-control" placeholder="Bộ nhớ ngoài" th:field="*{ram}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('ram')}" th:errors="*{ram}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Bộ nhớ trong</label>
+                        <div class="mt-1">
+                            <input type="number" class="form-control" placeholder="Bộ nhớ trong" th:field="*{rom}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('rom')}" th:errors="*{rom}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Hệ điều hành</label>
+                        <div class="mt-1">
+                            <input type="text" class="form-control" placeholder="Hệ điều hành" th:field="*{os}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('os')}" th:errors="*{os}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Độ phân giải</label>
+                        <div class="mt-1">
+                            <input type="text" class="form-control" placeholder="Độ phân giải" th:field="*{resolution}" required>
+                            <span class="text-danger" th:if="${#fields.hasErrors('resolution')}" th:errors="*{resolution}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Màu sắc</label>
+                        <div class="mt-1">
+                            <select th:field="*{color}" class="form-select">
+                                <option th:each="choiceC : ${colors.entrySet()}"
+                                        th:value="${choiceC.getKey()}"
+                                        th:text="${choiceC.getValue()}"
+                                        th:selected="(${choiceC.getKey() } == 'red')" ></option>
+                            </select>
+                            <span class="text-danger" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Tình trạng</label>
+                        <div class="mt-1">
+                            <select th:field="*{status}" class="form-select">
+                                <option th:each="choiceS : ${statusOption.entrySet()}"
+                                        th:value="${choiceS.getKey()}"
+                                        th:text="${choiceS.getValue()}"
+                                        th:selected="(${choiceS.getKey() } == '0')" ></option>
+                            </select>
+                            <span class="text-danger" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Loại sản phẩm</label>
+                        <div class="mt-1">
+                            <select th:field="*{category}" class="form-select">
+                                <option th:each="category : ${listCategory}"
+                                        th:value="${category.id}"
+                                        th:text="${category.name}"
+                                        ></option>
+                            </select>
+                            <span class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Nhãn hiệu sản phẩm</label>
+                        <div class="mt-1">
+                            <select th:field="*{brand}" class="form-select">
+                                <option th:each="brand : ${listBrand}"
+                                        th:value="${brand.id}"
+                                        th:text="${brand.name}"
+                                ></option>
+                            </select>
+                            <span class="text-danger" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Mô tả</label>
+                        <div class="mt-1">
+                            <textarea class="form-control" placeholder="Mô tả" th:field="*{description}"></textarea>
+                            <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-1">
+                        <label class="form-control-label font-weight-bolder">Hình ảnh</label>
+                        <div class="mt-1">
+                            <input type="file" name="image" accept="image/*" class="form-control-file" >
+                        </div>
+                        <div class="alert alert-danger" role="alert" th:if="${param.errorS !=null}">
+                            File vượt quá 5MB
+                        </div>
+                        <div class="alert alert-danger" role="alert" th:if="${param.errorE !=null}">
+                            Vui lòng chọn hình ảnh sản phẩm
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="d-flex">
+                        <button class="btn btn-primary mt-1" type="submit">Lưu</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

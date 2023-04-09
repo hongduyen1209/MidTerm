@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>PhoneShop</title>
+</head>
+<body>
+    <div th:replace="fragment/header.html :: header"></div>
+    <div class="container">
+        <div th:replace="fragment/banner.html :: banner"></div>
+        <div th:replace="list_product.html :: products(${brands},${categories},${products})"></div>
+    </div>
+    <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            BuiLeHongDuyen-51800275
+        </div>
+    </footer>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Chi tiết sản phẩm</title>
+</head>
+<body>
+    <div th:replace="fragment/header.html :: header"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="mt-3">
+                    <img th:src="'data:image/png;base64,' + ${p.imgBase64}" class="d-block w-100" alt="...">
+
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="mt-3">
+                    <h3 th:text="${p.name}"></h3>
+                    <p th:text="${p.category.name}"></p>
+                    <strong><p th:text="${p.priceFormat}"></p></strong>
+                    <p th:text="${p.description}"></p>
+                    <form th:action="@{/cart/add-to-cart}" method="post" th:object="${detail}">
+                        <div class="d-flex align-items-center">
+                            <input name="id" th:value="${p.id}" type="hidden">
+                            <input name="name" th:value="${p.name}" type="hidden">
+                            <input name="img" th:value="${p.imgBase64}" type="hidden">
+                            <input name="price" th:value="${p.price}" type="hidden">
+                            <input name="priceFormat" th:value="${p.priceFormat}" type="hidden">
+                            <input class="me-2" type="number" name="quantity" th:value="1" th:max="${p.quantity}" min="1"/>
+
+                            <button th:if="${p.quantity > 0 && p.status == '0'} " class="btn btn-primary btn-sm" type="submit">Chọn mua</button>
+                            <button th:if="${p.quantity <= 0} " class="btn btn-danger btn-sm" disabled>Hết hàng</button>
+                            <button th:if="${p.status == '1'} " class="btn btn-danger btn-sm" disabled>Ngừng kinh doanh</button>
+                        </div>
+                    </form>
+                    <h3>Cấu hình</h3>
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>Hệ điều hành</th>
+                            <td th:text="${p.os}"></td>
+                        </tr>
+                        <tr>
+                            <th>Độ phân giải</th>
+                            <td th:text="${p.resolution}"></td>
+                        </tr>
+                        <tr>
+                            <th>Màu sắc</th>
+                            <td th:text="${p.color}"></td>
+                        </tr>
+                        <tr>
+                            <th>Bộ nhớ trong</th>
+                            <td th:text="${p.rom}+ 'GB'"></td>
+                        </tr>
+                        <tr>
+                            <th>Bộ nhớ ngoài</th>
+                            <td th:text="${p.ram}+ 'GB'"></td>
+                        </tr>
+                        <tr>
+                            <th>Nhãn hiệu</th>
+                            <td th:text="${p.brand.name}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
